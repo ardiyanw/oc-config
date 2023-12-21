@@ -283,4 +283,5 @@ rules:
 - GEOSITE,tiktok,PG-tiktok
 - GEOIP,id,DIRECT-INDI
 - GEOIP,cloudflare,DIRECT-INDI
+- GEOSITE,microsoft,SERVER-SG
 - MATCH,GLOBAL
