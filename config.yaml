@@ -8,6 +8,10 @@ rule-providers:
     type: file
     behavior: classical
     path: "./rule_provider/bstation.yaml"
+  RP-portgame:
+    type: file
+    behavior: classical
+    path: "./rule_provider/portgame.yaml"
 proxy-providers:
   SERV-SG:
     type: file
@@ -284,4 +288,5 @@ rules:
 - GEOIP,id,DIRECT-INDI
 - GEOIP,cloudflare,DIRECT-INDI
 - GEOSITE,microsoft,SERVER-SG
+- RULE-SET,RP-portgame,DIRECT-INDI
 - MATCH,GLOBAL
