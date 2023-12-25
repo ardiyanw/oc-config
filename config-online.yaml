@@ -3,19 +3,19 @@ rule-providers:
   RP-whatsapp:
     type: http
     behavior: classical
-    path: "./rule_provider/rule_umum.yaml"
+    path: "./rule_provider/RP-whatsapp.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/whatsapp.yaml
     interval: 86400
   RP-bstation:
     type: http
     behavior: classical
-    path: "./rule_provider/rule_umum.yaml"
+    path: "./rule_provider/RP-bstation.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/bstation.yaml
     interval: 86400
   RP-portgame:
     type: http
     behavior: classical
-    path: "./rule_provider/rule_umum.yaml"
+    path: "./rule_provider/RP-portgame.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/portgame.yaml
     interval: 86400
 proxy-providers:
