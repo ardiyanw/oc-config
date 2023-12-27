@@ -16,6 +16,10 @@ rule-providers:
     type: file
     behavior: classical
     path: "./rule_provider/speedtest.yaml"
+  RP-zoom:
+    type: file
+    behavior: classical
+    path: "./rule_provider/zoom.yaml"
 proxy-providers:
   SERV-SG:
     type: file
@@ -288,6 +292,7 @@ rules:
 - RULE-SET,RP-whatsapp,PG-whatsapp
 - RULE-SET,RP-bstation,PG-bstation
 - RULE-SET,RP-speedtest,PG-speedtest
+- RULE-SET,RP-zoom,DIRECT-INDI
 - GEOSITE,facebook,PG-facebook
 - GEOIP,facebook,PG-facebook
 - GEOSITE,google,PG-google
