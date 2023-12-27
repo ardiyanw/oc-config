@@ -12,6 +12,10 @@ rule-providers:
     type: file
     behavior: classical
     path: "./rule_provider/portgame.yaml"
+  RP-speedtest:
+    type: file
+    behavior: classical
+    path: "./rule_provider/speedtest.yaml"
 proxy-providers:
   SERV-SG:
     type: file
@@ -73,6 +77,13 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-bstation
+  type: select
+  proxies:
+  - SERVER-SG
+  - DIRECT-INDI
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: PG-speedtest
   type: select
   proxies:
   - SERVER-SG
@@ -276,6 +287,7 @@ rules:
 - GEOIP,private,DIRECT-INDI,no-resolve
 - RULE-SET,RP-whatsapp,PG-whatsapp
 - RULE-SET,RP-bstation,PG-bstation
+- RULE-SET,RP-speedtest,PG-speedtest
 - GEOSITE,facebook,PG-facebook
 - GEOIP,facebook,PG-facebook
 - GEOSITE,google,PG-google
