@@ -303,6 +303,7 @@ rules:
 - GEOIP,telegram,PG-telegram
 - GEOSITE,tiktok,PG-tiktok
 - GEOIP,id,DIRECT-INDI
+- RULE-SET,RP-indo,DIRECT-INDI
 - GEOIP,cloudflare,DIRECT-INDI
 - GEOSITE,microsoft,SERVER-SG
 - RULE-SET,RP-portgame,DIRECT-INDI
