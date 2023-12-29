@@ -20,6 +20,10 @@ rule-providers:
     type: file
     behavior: classical
     path: "./rule_provider/zoom.yaml"
+  RP-indo:
+    type: file
+    behavior: classical
+    path: "./rule_provider/indo.yaml"
 proxy-providers:
   SERV-SG:
     type: file
