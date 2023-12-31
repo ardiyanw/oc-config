@@ -1,9 +1,9 @@
 proxies:
 - name: SG
   type: vmess
-  server: 104.26.14.208
+  server: bug
   port: 443
-  uuid: d28b3a04-3971-41ad-b164-ad49c7964901
+  uuid: *********
   alterId: 0
   cipher: auto
   udp: true
@@ -13,12 +13,12 @@ proxies:
   skip-cert-verify: false
   tls: true
   client-fingerprint: none
-  servername: sg.arwnetwork.one
+  servername: host
   network: ws
   ws-opts:
-    path: "/arw"
+    path: "/"
     headers:
-      Host: sg.arwnetwork.one
+      Host: host
   ip-version: ipv4
   tfo: true
-  interface-name: wwan0
+  interface-name: interface
