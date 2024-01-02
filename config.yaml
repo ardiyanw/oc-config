@@ -1,29 +1,4 @@
 ---
-rule-providers:
-  RP-whatsapp:
-    type: file
-    behavior: classical
-    path: "./rule_provider/whatsapp.yaml"
-  RP-bstation:
-    type: file
-    behavior: classical
-    path: "./rule_provider/bstation.yaml"
-  RP-portgame:
-    type: file
-    behavior: classical
-    path: "./rule_provider/portgame.yaml"
-  RP-speedtest:
-    type: file
-    behavior: classical
-    path: "./rule_provider/speedtest.yaml"
-  RP-zoom:
-    type: file
-    behavior: classical
-    path: "./rule_provider/zoom.yaml"
-  RP-indo:
-    type: file
-    behavior: classical
-    path: "./rule_provider/indo.yaml"
 proxy-providers:
   SERV-SG:
     type: file
@@ -281,6 +256,37 @@ dns:
     - msftncsi.com
     - "+.*"
   ipv6: false
+rule-providers:
+  RP-whatsapp:
+    type: http
+    behavior: classical
+    path: "./rule_provider/whatsapp.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/whatsapp.yaml
+  RP-bstation:
+    type: http
+    behavior: classical
+    path: "./rule_provider/bstation.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/bstation.yaml
+  RP-portgame:
+    type: http
+    behavior: classical
+    path: "./rule_provider/portgame.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/portgame.yaml
+  RP-speedtest:
+    type: http
+    behavior: classical
+    path: "./rule_provider/speedtest.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/speedtest.yaml
+  RP-zoom:
+    type: http
+    behavior: classical
+    path: "./rule_provider/zoom.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/zoom.yaml
+  RP-indo:
+    type: http
+    behavior: classical
+    path: "./rule_provider/indo.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/indo.yaml
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
