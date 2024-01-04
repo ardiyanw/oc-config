@@ -8,71 +8,71 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
       interval: 180
 proxy-groups:
-- name: SERVER-SG
-  type: select
-  use:
-  - SERV-SG
-- name: DIRECT-INDI
-  type: select
-  interface-name: eth1
-  proxies:
-  - DIRECT
-- name: PG-whatsapp
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-facebook
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-google
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-telegram
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-tiktok
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-twitter
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-bstation
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-- name: PG-speedtest
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
+  - name: SERVER-SG
+    type: select
+    use:
+    - SERV-SG
+  - name: DIRECT-INDI
+    type: select
+    interface-name: eth1
+    proxies:
+    - DIRECT
+  - name: PG-whatsapp
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-facebook
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-google
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-telegram
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-tiktok
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-twitter
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-bstation
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
+  - name: PG-speedtest
+    type: select
+    proxies:
+    - SERVER-SG
+    - DIRECT-INDI
+    url: http://www.gstatic.com/generate_204
+    interval: '300'
 port: 7890
 socks-port: 7891
 mixed-port: 7893
@@ -288,33 +288,33 @@ rule-providers:
     path: "./rule_provider/indo.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/indo.yaml
 rules:
-- DST-PORT,7895,REJECT
-- DST-PORT,7892,REJECT
-- DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-INDI
-- SRC-IP-CIDR,172.16.21.251/32,SERVER-SG
-- SRC-IP-CIDR,172.16.21.11/32,DIRECT-INDI
-- SRC-IP-CIDR,172.16.21.12/32,SERVER-SG
-- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-- IP-CIDR,103.253.27.84/32,DIRECT-INDI
-- IP-CIDR,38.9.141.66/32,DIRECT-INDI
-- DOMAIN-SUFFIX,arwnetwork.one,DIRECT-INDI
-- GEOIP,private,DIRECT-INDI,no-resolve
-- RULE-SET,RP-whatsapp,PG-whatsapp
-- RULE-SET,RP-bstation,PG-bstation
-- RULE-SET,RP-speedtest,PG-speedtest
-- RULE-SET,RP-zoom,DIRECT-INDI
-- GEOSITE,facebook,PG-facebook
-- GEOIP,facebook,PG-facebook
-- GEOSITE,google,PG-google
-- GEOIP,google,PG-google
-- GEOSITE,twitter,PG-twitter
-- GEOIP,twitter,PG-twitter
-- GEOSITE,telegram,PG-telegram
-- GEOIP,telegram,PG-telegram
-- GEOSITE,tiktok,PG-tiktok
-- GEOIP,id,DIRECT-INDI
-- RULE-SET,RP-indo,DIRECT-INDI
-- GEOIP,cloudflare,DIRECT-INDI
-- GEOSITE,microsoft,SERVER-SG
-- RULE-SET,RP-portgame,DIRECT-INDI
-- MATCH,GLOBAL
+  - DST-PORT,7895,REJECT
+  - DST-PORT,7892,REJECT
+  - DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-INDI
+  - SRC-IP-CIDR,172.16.21.251/32,SERVER-SG
+  - SRC-IP-CIDR,172.16.21.11/32,DIRECT-INDI
+  - SRC-IP-CIDR,172.16.21.12/32,SERVER-SG
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - IP-CIDR,103.253.27.84/32,DIRECT-INDI
+  - IP-CIDR,38.9.141.66/32,DIRECT-INDI
+  - DOMAIN-SUFFIX,arwnetwork.one,DIRECT-INDI
+  - GEOIP,private,DIRECT-INDI,no-resolve
+  - RULE-SET,RP-whatsapp,PG-whatsapp
+  - RULE-SET,RP-bstation,PG-bstation
+  - RULE-SET,RP-speedtest,PG-speedtest
+  - RULE-SET,RP-zoom,DIRECT-INDI
+  - GEOSITE,facebook,PG-facebook
+  - GEOIP,facebook,PG-facebook
+  - GEOSITE,google,PG-google
+  - GEOIP,google,PG-google
+  - GEOSITE,twitter,PG-twitter
+  - GEOIP,twitter,PG-twitter
+  - GEOSITE,telegram,PG-telegram
+  - GEOIP,telegram,PG-telegram
+  - GEOSITE,tiktok,PG-tiktok
+  - GEOIP,id,DIRECT-INDI
+  - RULE-SET,RP-indo,DIRECT-INDI
+  - GEOIP,cloudflare,DIRECT-INDI
+  - GEOSITE,microsoft,SERVER-SG
+  - RULE-SET,RP-portgame,DIRECT-INDI
+  - MATCH,GLOBAL
