@@ -21,4 +21,4 @@ proxies:
       Host: host
   ip-version: ipv4
   tfo: true
-  interface-name: interface
+  interface-name: iface
