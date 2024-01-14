@@ -21,4 +21,4 @@ proxies:
       Host: sg.arwnetwork.one
   ip-version: ipv4
   tfo: true
-  interface-name: iface
+  interface-name: wwan0
