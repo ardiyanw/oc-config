@@ -6,21 +6,42 @@ proxy-providers:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 180
+  SERV-ETH1:
+    type: file
+    path: "./proxy_provider/akun-SG-ETH1.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 180
 proxy-groups:
 - name: SERVER-SG
-  type: select
+  type: load-balance
+  strategy: round-robin
   use:
   - SERV-SG
+- name: SERVER-ETH1
+  type: load-balance
+  strategy: round-robin
+  use:
+  - SERV-ETH1
 - name: DIRECT-INDI
   type: select
   interface-name: eth1
   proxies:
   - DIRECT
+- name: FAILOVER
+  type: fallback
+  proxies:
+  - SERVER-SG
+  - SERVER-ETH1
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
 - name: PG-whatsapp
   type: select
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-facebook
@@ -28,6 +49,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-google
@@ -35,6 +57,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-telegram
@@ -42,6 +65,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-tiktok
@@ -49,6 +73,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-twitter
@@ -56,6 +81,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-bstation
@@ -63,6 +89,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: PG-speedtest
@@ -70,6 +97,7 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - DIRECT-INDI
+  - FAILOVER
   url: http://www.gstatic.com/generate_204
   interval: '300'
 port: 7890
@@ -290,10 +318,6 @@ rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
 - DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-INDI
-- SRC-IP-CIDR,172.16.201.10/32,SERVER-SG
-- SRC-IP-CIDR,172.16.201.9/32,SERVER-SG
-- SRC-IP-CIDR,172.16.201.11/32,DIRECT-INDI
-- SRC-IP-CIDR,172.16.201.12/32,SERVER-SG
 - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
 - IP-CIDR,103.253.27.84/32,DIRECT-INDI
 - IP-CIDR,38.9.141.66/32,DIRECT-INDI
@@ -314,8 +338,8 @@ rules:
 - GEOSITE,tiktok,PG-tiktok
 - RULE-SET,RP-indo,DIRECT-INDI
 - GEOIP,cloudflare,DIRECT-INDI
-- GEOSITE,microsoft,SERVER-SG
+- GEOSITE,microsoft,FAILOVER
 - GEOIP,id,DIRECT-INDI
 - RULE-SET,RP-portgame,DIRECT-INDI
-- DST-PORT,8080,SERVER-SG
+- DST-PORT,8080,FAILOVER
 - MATCH,GLOBAL
