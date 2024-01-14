@@ -5,14 +5,14 @@ proxy-providers:
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 180
+      interval: 60
   SERV-ETH1:
     type: file
     path: "./proxy_provider/akun-SG-ETH1.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 180
+      interval: 60
 proxy-groups:
 - name: SERVER-SG
   type: load-balance
@@ -34,8 +34,9 @@ proxy-groups:
   proxies:
   - SERVER-SG
   - SERVER-ETH1
+  - DIRECT-INDI
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-whatsapp
   type: select
   proxies:
@@ -43,7 +44,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-facebook
   type: select
   proxies:
@@ -51,7 +52,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-google
   type: select
   proxies:
@@ -59,7 +60,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-telegram
   type: select
   proxies:
@@ -67,7 +68,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-tiktok
   type: select
   proxies:
@@ -75,7 +76,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-twitter
   type: select
   proxies:
@@ -83,7 +84,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-bstation
   type: select
   proxies:
@@ -91,7 +92,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 - name: PG-speedtest
   type: select
   proxies:
@@ -99,7 +100,7 @@ proxy-groups:
   - DIRECT-INDI
   - FAILOVER
   url: http://www.gstatic.com/generate_204
-  interval: '300'
+  interval: '60'
 port: 7890
 socks-port: 7891
 mixed-port: 7893
