@@ -19,16 +19,22 @@ proxy-groups:
   strategy: round-robin
   use:
   - SERV-SG
+  url: http://www.gstatic.com/generate_204
+  interval: '60'
 - name: SERVER-ETH1
   type: load-balance
   strategy: round-robin
   use:
   - SERV-ETH1
+  url: http://www.gstatic.com/generate_204
+  interval: '60'
 - name: DIRECT-INDI
   type: select
   interface-name: eth1
   proxies:
   - DIRECT
+  url: http://www.gstatic.com/generate_204
+  interval: '60'
 - name: FAILOVER
   type: fallback
   proxies:
