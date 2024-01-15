@@ -5,8 +5,8 @@ proxy-providers:
     path: "./proxy_provider/akun-SG.yaml"
     health-check:
       enable: true
-      url: https://ping.xmbb.net/
-      interval: 30
+      url: https://arwnetwork.one/
+      interval: 300
 proxy-groups:
 - name: SERVER-SG
   type: select
@@ -17,15 +17,15 @@ proxy-groups:
   interface-name: eth1
   proxies:
   - DIRECT
-  url: https://ping.xmbb.net/
-  interval: '30'
+  url: https://arwnetwork.one/
+  interval: '300'
 - name: FAILOVER
   type: fallback
   proxies:
   - SERVER-SG
   - DIRECT-INDI
-  url: https://ping.xmbb.net/
-  interval: '30'
+  url: https://arwnetwork.one/
+  interval: '380'
 port: 7890
 socks-port: 7891
 mixed-port: 7893
