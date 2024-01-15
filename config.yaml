@@ -1,112 +1,31 @@
+---
 proxy-providers:
   SERV-SG:
     type: file
     path: "./proxy_provider/akun-SG.yaml"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 60
-  SERV-ETH1:
-    type: file
-    path: "./proxy_provider/akun-SG-ETH1.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 60
+      url: https://ping.xmbb.net/
+      interval: 30
 proxy-groups:
 - name: SERVER-SG
-  type: load-balance
-  strategy: round-robin
+  type: select
   use:
   - SERV-SG
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: SERVER-ETH1
-  type: load-balance
-  strategy: round-robin
-  use:
-  - SERV-ETH1
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
 - name: DIRECT-INDI
   type: select
   interface-name: eth1
   proxies:
   - DIRECT
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
+  url: https://ping.xmbb.net/
+  interval: '30'
 - name: FAILOVER
   type: fallback
   proxies:
   - SERVER-SG
-  - SERVER-ETH1
   - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-whatsapp
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-facebook
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-google
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-telegram
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-tiktok
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-twitter
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-bstation
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
-- name: PG-speedtest
-  type: select
-  proxies:
-  - SERVER-SG
-  - DIRECT-INDI
-  - FAILOVER
-  url: http://www.gstatic.com/generate_204
-  interval: '60'
+  url: https://ping.xmbb.net/
+  interval: '30'
 port: 7890
 socks-port: 7891
 mixed-port: 7893
@@ -330,19 +249,19 @@ rules:
 - IP-CIDR,38.9.141.66/32,DIRECT-INDI
 - DOMAIN-SUFFIX,arwnetwork.one,DIRECT-INDI
 - GEOIP,private,DIRECT-INDI,no-resolve
-- RULE-SET,RP-whatsapp,PG-whatsapp
-- RULE-SET,RP-bstation,PG-bstation
-- RULE-SET,RP-speedtest,PG-speedtest
+- RULE-SET,RP-whatsapp,DIRECT-INDI
+- RULE-SET,RP-bstation,DIRECT-INDI
+- RULE-SET,RP-speedtest,FAILOVER
 - RULE-SET,RP-zoom,DIRECT-INDI
-- GEOSITE,facebook,PG-facebook
-- GEOIP,facebook,PG-facebook
-- GEOSITE,google,PG-google
-- GEOIP,google,PG-google
-- GEOSITE,twitter,PG-twitter
-- GEOIP,twitter,PG-twitter
-- GEOSITE,telegram,PG-telegram
-- GEOIP,telegram,PG-telegram
-- GEOSITE,tiktok,PG-tiktok
+- GEOSITE,facebook,FAILOVER
+- GEOIP,facebook,FAILOVER
+- GEOSITE,google,FAILOVER
+- GEOIP,google,FAILOVER
+- GEOSITE,twitter,FAILOVER
+- GEOIP,twitter,FAILOVER
+- GEOSITE,telegram,FAILOVER
+- GEOIP,telegram,FAILOVER
+- GEOSITE,tiktok,FAILOVER
 - RULE-SET,RP-indo,DIRECT-INDI
 - GEOIP,cloudflare,DIRECT-INDI
 - GEOSITE,microsoft,FAILOVER
