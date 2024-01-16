@@ -245,6 +245,11 @@ rule-providers:
     behavior: classical
     path: "./rule_provider/spotify.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/spotify.yaml
+  RP-telegram:
+    type: http
+    behavior: classical
+    path: "./rule_provider/telegram.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/telegram.yaml
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
@@ -262,6 +267,7 @@ rules:
 - RULE-SET,RP-speedtest,FAILOVER
 - RULE-SET,RP-zoom,DIRECT-INDI
 - RULE-SET,RP-spotify,DIRECT-INDI
+- RULE-SET,RP-telegram,FAILOVER
 - GEOSITE,facebook,FAILOVER
 - GEOIP,facebook,FAILOVER
 - GEOSITE,google,FAILOVER
