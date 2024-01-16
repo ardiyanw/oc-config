@@ -240,6 +240,11 @@ rule-providers:
     behavior: classical
     path: "./rule_provider/indo.yaml"
     url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/indo.yaml
+  RP-spotify:
+    type: http
+    behavior: classical
+    path: "./rule_provider/spotify.yaml"
+    url: https://raw.githubusercontent.com/ardiyanw/oc-config/main/rule-provider/spotify.yaml
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
@@ -256,6 +261,7 @@ rules:
 - RULE-SET,RP-bstation,DIRECT-INDI
 - RULE-SET,RP-speedtest,FAILOVER
 - RULE-SET,RP-zoom,DIRECT-INDI
+- RULE-SET,RP-spotify,DIRECT-INDI
 - GEOSITE,facebook,FAILOVER
 - GEOIP,facebook,FAILOVER
 - GEOSITE,google,FAILOVER
