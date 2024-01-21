@@ -5,26 +5,37 @@ proxy-providers:
     path: "./proxy_provider/akun-SG.yaml"
     health-check:
       enable: true
-      url: http://www.gstatic.com/generate_204
+      url: http://ping.xmbb.net/
       interval: 60
 proxy-groups:
 - name: SERVER-SG
   type: select
+  interface-name: wwan0
   use:
   - SERV-SG
+  url: http://ping.xmbb.net/
+  interval: '60'
 - name: DIRECT-INDI
   type: select
   interface-name: eth1
   proxies:
   - DIRECT
-  url: http://www.gstatic.com/generate_204
+  url: http://ping.xmbb.net/
   interval: '60'
 - name: FAILOVER
   type: fallback
   proxies:
   - SERVER-SG
   - DIRECT-INDI
-  url: http://www.gstatic.com/generate_204
+  url: http://ping.xmbb.net/
+  interval: '60'
+- name: TUNNEL
+  type: select
+  proxies:
+  - SERVER-SG
+  - DIRECT-INDI
+  - FAILOVER
+  url: http://ping.xmbb.net/
   interval: '60'
 port: 7890
 socks-port: 7891
@@ -253,38 +264,38 @@ rule-providers:
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
-# ml update
 - DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-INDI
 - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
 - IP-CIDR,103.253.27.84/32,DIRECT-INDI
 - IP-CIDR,38.9.141.66/32,DIRECT-INDI
-# lancache
-- SRC-IP-CIDR,172.16.201.9/32,FAILOVER
-#dns server
-- SRC-IP-CIDR,172.16.100.251/32,DIRECT-INDI
-#dns server
-- SRC-IP-CIDR,172.16.100.252/32,FAILOVER
-- DOMAIN-SUFFIX,arwnetwork.one,DIRECT-INDI
+- SRC-IP-CIDR,172.16.201.9/32,TUNNEL
+- SRC-IP-CIDR,172.16.201.11/32,DIRECT-INDI
+- SRC-IP-CIDR,172.16.201.12/32,TUNNEL
+- DOMAIN-SUFFIX,pupuk-indonesia.com,DIRECT-INDI
+- DOMAIN-SUFFIX,mediafire.com,TUNNEL
 - GEOIP,private,DIRECT-INDI,no-resolve
 - RULE-SET,RP-whatsapp,DIRECT-INDI
 - RULE-SET,RP-bstation,DIRECT-INDI
-- RULE-SET,RP-speedtest,FAILOVER
+- RULE-SET,RP-speedtest,TUNNEL
 - RULE-SET,RP-zoom,DIRECT-INDI
 - RULE-SET,RP-spotify,DIRECT-INDI
-- RULE-SET,RP-telegram,FAILOVER
-- GEOSITE,facebook,FAILOVER
-- GEOIP,facebook,FAILOVER
-- GEOSITE,google,FAILOVER
-- GEOIP,google,FAILOVER
-- GEOSITE,twitter,FAILOVER
-- GEOIP,twitter,FAILOVER
-- GEOSITE,telegram,FAILOVER
-- GEOIP,telegram,FAILOVER
-- GEOSITE,tiktok,FAILOVER
+- RULE-SET,RP-telegram,TUNNEL
+- GEOSITE,facebook,TUNNEL
+- GEOIP,facebook,TUNNEL
+- GEOSITE,google,TUNNEL
+- GEOIP,google,TUNNEL
+- GEOSITE,twitter,TUNNEL
+- GEOIP,twitter,TUNNEL
+- GEOSITE,telegram,TUNNEL
+- GEOIP,telegram,TUNNEL
+- GEOSITE,tiktok,TUNNEL
 - GEOIP,cloudflare,FAILOVER
-- GEOSITE,microsoft,FAILOVER
+- GEOSITE,cloudflare,TUNNEL
+- GEOSITE,microsoft,TUNNEL
 - RULE-SET,RP-portgame,DIRECT-INDI
-- DST-PORT,8080,FAILOVER
+- DST-PORT,8080,TUNNEL
 - RULE-SET,RP-indo,DIRECT-INDI
+- GEOIP,sg,TUNNEL
+- GEOSITE,akamai,TUNNEL
 - GEOIP,id,DIRECT-INDI
 - MATCH,GLOBAL
