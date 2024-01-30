@@ -22,6 +22,14 @@ proxy-groups:
   - DIRECT
   url: http://ping.xmbb.net/
   interval: '60'
+- name: DIRECT-CON
+  type: select
+  proxies:
+  - SERVER-SG
+  - DIRECT-INDI
+  - FAILOVER
+  url: http://ping.xmbb.net/
+  interval: '60'
 - name: FAILOVER
   type: fallback
   proxies:
@@ -264,21 +272,21 @@ rule-providers:
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
-- DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-INDI
+- DOMAIN-SUFFIX,ml.youngjoygame.com,DIRECT-CON
 - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-- IP-CIDR,103.253.27.84/32,DIRECT-INDI
-- IP-CIDR,38.9.141.66/32,DIRECT-INDI
+- IP-CIDR,103.253.27.84/32,DIRECT-CON
+- IP-CIDR,38.9.141.66/32,DIRECT-CON
 - SRC-IP-CIDR,172.16.201.9/32,TUNNEL
-- SRC-IP-CIDR,172.16.201.11/32,DIRECT-INDI
+- SRC-IP-CIDR,172.16.201.11/32,DIRECT-CON
 - SRC-IP-CIDR,172.16.201.12/32,TUNNEL
-- DOMAIN-SUFFIX,pupuk-indonesia.com,DIRECT-INDI
+- DOMAIN-SUFFIX,pupuk-indonesia.com,DIRECT-CON
 - DOMAIN-SUFFIX,mediafire.com,TUNNEL
-- GEOIP,private,DIRECT-INDI,no-resolve
-- RULE-SET,RP-whatsapp,DIRECT-INDI
-- RULE-SET,RP-bstation,DIRECT-INDI
+- GEOIP,private,DIRECT-CON,no-resolve
+- RULE-SET,RP-whatsapp,DIRECT-CON
+- RULE-SET,RP-bstation,DIRECT-CON
 - RULE-SET,RP-speedtest,TUNNEL
-- RULE-SET,RP-zoom,DIRECT-INDI
-- RULE-SET,RP-spotify,DIRECT-INDI
+- RULE-SET,RP-zoom,DIRECT-CON
+- RULE-SET,RP-spotify,DIRECT-CON
 - RULE-SET,RP-telegram,TUNNEL
 - GEOSITE,facebook,TUNNEL
 - GEOIP,facebook,TUNNEL
@@ -292,10 +300,10 @@ rules:
 - GEOIP,cloudflare,FAILOVER
 - GEOSITE,cloudflare,TUNNEL
 - GEOSITE,microsoft,TUNNEL
-- RULE-SET,RP-portgame,DIRECT-INDI
+- RULE-SET,RP-portgame,DIRECT-CON
 - DST-PORT,8080,TUNNEL
-- RULE-SET,RP-indo,DIRECT-INDI
+- RULE-SET,RP-indo,DIRECT-CON
 - GEOIP,sg,TUNNEL
 - GEOSITE,akamai,TUNNEL
-- GEOIP,id,DIRECT-INDI
+- GEOIP,id,DIRECT-CON
 - MATCH,GLOBAL
